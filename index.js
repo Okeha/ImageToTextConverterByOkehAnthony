@@ -43,11 +43,11 @@ const convertImage = async (req, res) => {
   //       console.log(out.data.text)
   //     )}`,
   //   });
-  //   const config = {
-  //     lang: "eng",
-  //     oem: 1,
-  //     psm: 3,
-  //   };
+  // const config = {
+  //   lang: "eng",
+  //   oem: 1,
+  //   psm: 3,
+  // };
 
   tesseract
     .recognize(req.file.path, "enm")
