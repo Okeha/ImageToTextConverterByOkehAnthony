@@ -1,13 +1,16 @@
-const Tract = require("tesseract.js");
+// const tesseract = require("node-tesseract-ocr");
+const tesseract = require("tesseract.js");
 const express = require("express");
 // const e = require("express");
 const multer = require("multer");
 const fs = require("fs");
 const { text } = require("express");
-
+const path = require("path");
 const app = express();
 
+app.set("view engine", "ejs");
 app.use(express.json());
+app.use(express.static(path.join(__dirname + "/uploads")));
 
 const upload = multer({ dest: "uploads/" });
 
@@ -35,18 +38,33 @@ const upload = multer({ dest: "uploads/" });
 const convertImage = async (req, res) => {
   console.log(req.body);
   console.log(req.file.path);
-  res.json({
-    text: `${Tract.recognize(req.file.path, "enm").then((out) =>
-      console.log(out.data.text)
-    )}`,
-  });
+  //   res.json({
+  //     text: `${Tract.recognize(req.file.path, "enm").then((out) =>
+  //       console.log(out.data.text)
+  //     )}`,
+  //   });
+  //   const config = {
+  //     lang: "eng",
+  //     oem: 1,
+  //     psm: 3,
+  //   };
+
+  tesseract
+    .recognize(req.file.path, "enm")
+    .then((text) => {
+      console.log("Result:", text.data.text);
+      res.render("index", { data: text.data.text });
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
 };
 
 app.get(`/`, (req, res) => {
-  res.render("index");
+  res.render("index", { data: "" });
 });
 app.post("/convertImage", upload.single("image"), convertImage);
-
-app.listen(3090, () => {
-  console.log("Server Running on port 3090");
+const port = process.env.PORT || 3090;
+app.listen(port, () => {
+  console.log(`Server Running on port ${port}...`);
 });

@@ -1,9 +1,3 @@
-// const fs = require("fs");
-// var loadFile = function (event) {
-//   var image = document.getElementById("output");
-//   image.src = URL.createObjectURL(event.target.files[0]);
-// };
-
 const form = document.getElementById("form");
 
 form.addEventListener("submit", submitForm);
@@ -25,3 +19,13 @@ function submitForm(e) {
     .then((res) => console.log(res))
     .catch((err) => ("Error occured", err));
 }
+
+const copyToClipboard = (text) => {
+  const textarea = document.createElement("textarea");
+  document.body.appendChild(textarea);
+  textarea.value = text;
+  textarea.select();
+  textarea.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+};

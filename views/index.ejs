@@ -5,32 +5,183 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Text from Image!</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../style.css" type = "text/css">
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700,800' rel='stylesheet' type='text/css'>
     <!-- <link rel="stylesheet" href="font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
+	<style>
+        body {
+  background-color: black;
+  font-family: "Raleway", sans-serif;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  font-family: "Raleway", sans-serif;
+  padding: 0;
+  margin:0;
+}
+
+.container {
+  height: 300px;
+  padding-top: 70px;
+  background-image: url("../images/photo-1608311398753-6df2bde3177c.avif");
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+header{
+    margin:0;
+    padding:10px;
+    height: 30px;
+    width:100%;
+    font-style: italic;
+    font-family: cursive;
+    font-weight: bolder;
+    border-bottom: 1px black solid;
+    background-color: white;
+    color:black;
+    justify-content:center ;
+    align-items: center;
+    text-align: center;
+    position:fixed;
+}
+.image {
+  justify-content: center;
+  align-items: center;
+}
+img {
+    max-width: 80%;
+  align-items: center;
+  justify-content: center;
+  padding-left: 50px;
+}
+.uploader {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: large;
+  margin-right: 15px;
+}
+i{
+    background-color: black;
+    color:white;
+}
+i:hover{
+    color: #d43f52;
+}
+.uploader:hover {
+  background-color: #d43f52;
+}
+
+.tArea {
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 0.5px solid rgb(235, 232, 232);
+}
+
+footer {
+  background-color: black;
+  border-top: 1px solid #090909;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+footer hr {
+  width: 100px;
+}
+/* end footer */
+
+/* start social icon */
+.social-icon {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+.social-icon li {
+  display: inline-block;
+  list-style: none;
+}
+.imageStyle{
+    justify-content: center;
+    align-items: center;
+    /* max-width: fit-content; */
+}
+.social-icon li a {
+  border-radius: 50%;
+  color: #606060;
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
+  text-align: center;
+  margin-right: 10px;
+}
+.social-icon li a:hover {
+  color: #d43f52;
+}
+/* end social icon */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  body {
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .imageStyle{
+      justify-content: center;
+      align-items: center;
+  }
+  img{
+      justify-content: center;
+      align-items: center;
+      max-width: 80%;
+      height: 60%;
+      margin-right: 20px;
+  }
+  textarea{
+      width:80%;
+  }
+}
+    </style>	
 </head>
 
 <body>
-    <i class="fa fa-car"></i>
+    <header>Developed and Maintained by Okeh Anthony <i class="fa fa-check" style="background-color:black;"></i></header>
     <div class= "container">
-    <h1>Image to text converter by Okeh Anthony</h1>
-    <h2 class="getText">Get any text from an Image by adding the image file below!</h2>
+    
+        <h1>Image to text converter by Okeh Anthony</h1>
+    
+        <h2 class="getText">Get any text from an Image by adding the image file below!</h2>
 
-    <form action="/convertImage" method="post" id="form" enctype="multipart/form-data">
-        <p><input type="file"  accept="image/*" name="image" id="file" required onchange="loadFile(event)" style="display: none;"></p>
-    <p style="margin-top: 50px;"><label for="file" style="cursor: pointer;" class="uploader">Upload Image</label></p>
-    </form>
     
-</div>
-<div style="height: 500px" id= "image">
-    <img id="output" width="200" />
-</div>
-<div class="tArea">
+        <form action="/convertImage" method="post" id="form" enctype="multipart/form-data">
     
-</div>
-</div>
+            <p><input type="file"  accept="image/*" name="image" id="file" required onchange="loadFile(event)" style="display: none;"></p>
+    
+            <p style="margin-top: 50px;"><label for="file" style="cursor: pointer;" class="uploader">Upload Image</label></p>
+    
+            <button class="uploader" style="background-color: transparent;color:white;">Extract Text From Image</button>
+    
+        </form>
+        <div style="justify-content: center;align-items: center; max-width:100%; margin-top: 70px;margin-bottom: 70px;">
+            <img class="imageStyle" id = "output" src="" alt="">
+            </div>
+        
+            <div style="text-align: center;justify-content: center; margin-bottom: 70px;margin-bottom: 80px;">
+            
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
+    
+                <textarea name="" id="tArea" cols="70" rows="30">
+                    <%=data%>
+                </textarea>    
+        </div>    
+       
     <footer>
         <div class="container1">
             <div class="row">
@@ -46,6 +197,11 @@
             </div>
         </div>
     </footer>
-    <script src ="./script.js"></script>
+    <script>
+        var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+    </script>
 </body>
 </html>
