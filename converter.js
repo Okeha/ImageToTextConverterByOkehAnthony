@@ -1,0 +1,5 @@
+const T = require("tesseract.js");
+
+T.recognize("./Screenshot (244).png", "eng", {
+  logger: (e) => console.log(e),
+}).then((out) => console.log(out));
